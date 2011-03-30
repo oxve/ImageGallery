@@ -1,19 +1,14 @@
 
 -top priority-
 
-* messages
-    - file load status
-    - upload status
-    - error messages
-
 * voting
 
 * tagging
 
-* adding uploader to uploads
+* adding uploader name to uploads
 
 
--needs stuff before work can be done-
+-----medium priority-----
 
 * stats
     - top uploader
@@ -27,6 +22,11 @@
 
 * random image
 
+* messages (branch: add-message support)
+    - file load status
+    - server error when uploading
 
--bugs-
-* upload when less than eight images will remove image
+
+-----bugs-----
+* upload when less than eight images will remove image, requires reload of page
+* something is obscuring the messages (z-index)
