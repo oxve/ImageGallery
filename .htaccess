@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+  Options FollowSymLinks
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^list$ cgi/list.py [L,NC]
+  RewriteRule ^upload$ cgi/upload.py [L,NC]
+</IfModule>

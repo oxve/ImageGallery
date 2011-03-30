@@ -46,6 +46,10 @@ function setupNavigation() {
 
 function loadImages() {
     $.get('/list', function(data) {
+        if (!data || !data.images)
+            // TODO: show message?
+            return;
+            
         var sortedlist = data.images.sort(function(a,b){
             return b.time-a.time;
         });

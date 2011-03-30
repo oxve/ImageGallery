@@ -1,7 +1,3 @@
-
-
-
-asdas
 var AjaxFileUpload = {};
 
 // Default event handlers
