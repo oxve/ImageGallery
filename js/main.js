@@ -146,7 +146,7 @@ $(function () {
 
 function uploadFiles(fileList) {
     var i;
-    for (i in fileList) {
+    for (i = 0; i < fileList.length; ++i) {
         var file = fileList[i];
         if (!file || !file.type || file.type.length < 5 || file.type.substr(0, 5) != 'image') {
             msgq.message(file.fileName, 'file type not supported');
