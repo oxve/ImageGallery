@@ -149,65 +149,48 @@ function uploadFiles(fileList) {
     for (i = 0; i < fileList.length; ++i) {
         var file = fileList[i];
         if (!file || !file.type || file.type.length < 5 || file.type.substr(0, 5) != 'image') {
-            msgq.message(file.fileName, 'file type not supported');
+            msgq.message('error' + new Date().getTime(), 'file type not supported');
             continue;
         }
 
-        var progressId = '_' + new Date().getTime();
-        $('#loaderContainer').append('<div id="' + progressId + '" class="loader">' + file.name + '<span class="progress"></span></div>');
-
+        var ulId = '_ul' + i + '_' + new Date().getTime();
+        var dlId = '_dl' + i + '_' + new Date().getTime();
         var handlers = {
             dl: {
-                onload: function(e) {
+                onload: (function(id, imgName) { return function(e) {
                     var resp = $.parseJSON(e.target.responseText);
-                    // TODO: Handle status better
-                    console.log(resp);
                     if (resp.status == 'error') {
+                        msgq.message(id, 'Error when uploading ' + imgName + ': ' + resp.message);
                         return;
                     }
                     loadImage(resp, '#slideshow', true);
                     $('#slideshow > div:last-child').remove();
-                },
-                onload: function(e) {
-                    var resp = $.parseJSON(e.target.responseText);
-                    // TODO: Handle status better
-                    console.log(resp);
-                    if (resp.status == 'error') {
-                        return;
-                    }
-                    loadImage(resp, '#slideshow', true);
-                    $('#slideshow > div:last-child').remove();
-                }
+                };})(dlId, file.fileName)
             },
             ul: {
-                onprogress: function (e) {
-                    //$('#' + id + ' .progress').html('Uploading: ' + Math.round((e.loaded / e.total) * 100) + ' %');
-                    console.log('Uploading: ' + Math.round((e.loaded / e.total) * 100) + ' %');
-                },
-                onload: function (e) {
-                    //$('#' + id + ' .progress').html('Uploading: done');
-                    //setTimeout(function () { $('#' + id).remove(); }, 1500);
-                    console.log('upload done');
-                }
+                onprogress: (function(id, imgName) { return function (e) {
+                    msgq.message(id, 'Uploading ' + imgName + ': ' + Math.round((e.loaded / e.total) * 100) + ' %');
+                };})(ulId, file.fileName),
+                onload: (function(id, imgName) { return function (e) {
+                    msgq.message(id, imgName + ' done', 3000);
+                };})(ulId, file.fileName)
             }
         };
 
         var reader = new FileReader();
-        reader.onloadend = (function (img, id) {
+        reader.onloadend = (function (img, id, handlerObj) {
             return function (e) {
-                //$('#' + id + ' .progress').html('Loading file: done');
                 console.log('done loading');
                 var uploader = $.cookie('whoami') || 'anonymous';
-                var afu = new AjaxFileUpload(handlers);
+                var afu = new AjaxFileUpload(handlerObj);
                 afu.uploadFile(img, e.target.result, uploader);
             };
-        })(file, progressId);
+        })(file, ulId, handlers);
         reader.onprogress = (function (id) {
             return function (e) {
-                //$('#' + id + ' .progress').html('Loading file: ' + Math.round((e.loaded / e.total) * 100) + ' %');
                 console.log('Loading file: ' + Math.round((e.loaded / e.total) * 100) + ' %');
             };
-        })(progressId);
+        })(ulId);
         reader.readAsBinaryString(file);
     }
 }

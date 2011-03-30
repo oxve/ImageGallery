@@ -7,7 +7,7 @@ function MessageQueue(messageContainer) {
 
 MessageQueue.prototype.message = function(id, msg, timeout) {
     var t = this;
-    var element = $('#'+id, $(t._mc));
+    var element = $('#'+id, t._mc);
     if (element.length != 1) {
         // TODO: add a remove button
         element = $('<div id="'+id+'"></div>');
