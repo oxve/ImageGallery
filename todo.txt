@@ -1,8 +1,10 @@
 
 -top priority-
 
-* refactor AjaxUpload
-    - needs to be instantiable so upload progress etc can be shown
+* messages
+    - file load status
+    - upload status
+    - error messages
 
 * voting
 
@@ -24,3 +26,7 @@
 -low priority-
 
 * random image
+
+
+-bugs-
+* upload when less than eight images will remove image
