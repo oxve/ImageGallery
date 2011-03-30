@@ -1,3 +1,4 @@
+#!/opt/local/bin/python
 import cgi#, cgitb
 #cgitb.enable()
 import os
