@@ -1,5 +1,5 @@
 
--top priority-
+-----top priority-----
 
 * voting
 
@@ -18,7 +18,7 @@
 * latest
 
 
--low priority-
+-----low priority-----
 
 * random image
 
