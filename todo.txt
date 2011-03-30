@@ -1,0 +1,26 @@
+
+-top priority-
+
+* refactor AjaxUpload
+    - needs to be instantiable so upload progress etc can be shown
+
+* voting
+
+* tagging
+
+* adding uploader to uploads
+
+
+-needs stuff before work can be done-
+
+* stats
+    - top uploader
+    - top images
+    - ?
+
+* latest
+
+
+-low priority-
+
+* random image

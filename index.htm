@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>theImageGallery</title>
+<meta name="keywords" content="image gallery funny images" />
+<meta name="description" content="" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/ajaxupload.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="js/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+<body>
+<div>
+    <a id="latest" />
+    <a id="random" />
+    <a id="top" />
+</div>
+<div id="messages"></div>
+<div id="logo">
+    <h1><a href="#">theImageGallery</a></h1>
+</div>
+<div id="header">
+    <div id="menu">
+        <ul>
+            <li><a id="upload_menu" href="#">upload</a></li>
+            <li><a id="latest_menu" href="#latest">latest</a></li>
+            <li><a id="random_menu" href="#random">random</a></li>
+            <li><a id="top_menu" href="#top">top</a></li>
+            <li><a href="#">about</a></li>
+            <li><a href="#">contact</a></li>
+            <li style="float:right;"><a href="todo.txt">roadmap</a></li>
+        </ul>
+    </div>
+</div>
+<div id="content">
+    <div id="whoareyou">
+        <form action="post">
+            <fieldset>
+                <label for="username">Mind telling us who you are?</label>
+                <input id="username" type="text" /> <a href="#">Don't ask me again</a>
+            </fieldset>
+        </form>
+    </div>
+    
+    <div id="droparea">
+        drop files to upload
+    </div>
+    
+    <div id="navigation">
+        <a href="#" class="left">&nbsp;&lt;</a>
+        <a href="#" class="right">&nbsp;&gt;</a>
+    </div>
+    
+    <div id="slideshow" class="normal"></div>
+</div>
+<div id="footer">
+    <p>Disclaimer: All images are uploaded by users of this site. The content is not moderated.</p>
+</div>
+</body>
+</html>
