@@ -100,9 +100,7 @@ $(function () {
         $('#whoareyou').slideUp();
         return false;
     });
-  
-    
-  
+
     $('#upload_menu').click(function(){
         $('#droparea').toggle();
         return false;
@@ -115,7 +113,7 @@ $(function () {
         uploadFiles(e.dataTransfer.files);
         return false;
     };
-    
+
     droparea.ondragleave = function(e) {
         $('#droparea').hide();
         return false;
@@ -125,7 +123,7 @@ $(function () {
         //$('#droparea').css('background-color', '#ffffdd');
         return false;
     };
-  
+
     document.getElementById('slideshow').ondragover = function (e) {
         $('#droparea').show();
     };
@@ -144,37 +142,50 @@ function uploadFiles(fileList) {
         var progressId = '_' + new Date().getTime();
         $('#loaderContainer').append('<div id="' + progressId + '" class="loader">' + file.name + '<span class="progress"></span></div>');
 
-
-        AjaxFileUpload.ul.onprogress = function (e) {
-            //$('#' + id + ' .progress').html('Uploading: ' + Math.round((e.loaded / e.total) * 100) + ' %');
-            console.log('Uploading: ' + Math.round((e.loaded / e.total) * 100) + ' %');
-        };
-
-        AjaxFileUpload.ul.onload = function (e) {
-			//$('#' + id + ' .progress').html('Uploading: done');
-			//setTimeout(function () { $('#' + id).remove(); }, 1500);
-			console.log('upload done');
-		};
-		
-		AjaxFileUpload.dl.onload = function(e) {
-            var resp = $.parseJSON(e.target.responseText);
-            // TODO: Handle status better
-            console.log(resp);
-            if (resp.status == 'error') {
-                return;
+        var handlers = {
+            dl: {
+                onload: function(e) {
+                    var resp = $.parseJSON(e.target.responseText);
+                    // TODO: Handle status better
+                    console.log(resp);
+                    if (resp.status == 'error') {
+                        return;
+                    }
+                    loadImage(resp, '#slideshow', true);
+                    $('#slideshow > div:last-child').remove();
+                },
+                onload: function(e) {
+                    var resp = $.parseJSON(e.target.responseText);
+                    // TODO: Handle status better
+                    console.log(resp);
+                    if (resp.status == 'error') {
+                        return;
+                    }
+                    loadImage(resp, '#slideshow', true);
+                    $('#slideshow > div:last-child').remove();
+                }
+            },
+            ul: {
+                onprogress: function (e) {
+                    //$('#' + id + ' .progress').html('Uploading: ' + Math.round((e.loaded / e.total) * 100) + ' %');
+                    console.log('Uploading: ' + Math.round((e.loaded / e.total) * 100) + ' %');
+                },
+                onload: function (e) {
+                    //$('#' + id + ' .progress').html('Uploading: done');
+                    //setTimeout(function () { $('#' + id).remove(); }, 1500);
+                    console.log('upload done');
+                }
             }
-            
-            loadImage(resp, '#slideshow', true);
-            $('#slideshow > div:last-child').remove();
         };
-		
+
         var reader = new FileReader();
         reader.onloadend = (function (img, id) {
             return function (e) {
                 //$('#' + id + ' .progress').html('Loading file: done');
                 console.log('done loading');
                 var uploader = $.cookie('whoami') || 'anonymous';
-                AjaxFileUpload.uploadFile(img, e.target.result, uploader);
+                var afu = new AjaxFileUpload(handlers);
+                afu.uploadFile(img, e.target.result, uploader);
             };
         })(file, progressId);
         reader.onprogress = (function (id) {
@@ -183,6 +194,6 @@ function uploadFiles(fileList) {
                 console.log('Loading file: ' + Math.round((e.loaded / e.total) * 100) + ' %');
             };
         })(progressId);
-		reader.readAsBinaryString(file);
+        reader.readAsBinaryString(file);
     }
 }
