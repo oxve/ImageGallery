@@ -1,10 +1,11 @@
 
--top priority-
+-----top priority-----
 
 * messages
     - file load status
     - upload status
-    - error messages
+    - error message
+        - file type error
 
 * voting
 
@@ -13,7 +14,7 @@
 * adding uploader to uploads
 
 
--needs stuff before work can be done-
+-----needs stuff before work can be done-----
 
 * stats
     - top uploader
@@ -23,10 +24,12 @@
 * latest
 
 
--low priority-
+-----low priority-----
 
 * random image
 
+* navigation
+    - support back/forward button browsing
 
--bugs-
-* upload when less than eight images will remove image
+-----bugs-----
+* upload when less than eight images will remove image, requires reload of page

@@ -1,3 +1,4 @@
+var msgq = new MessageQueue('#messages');
 
 function loadImage(params, addTo, prepend) {
     var image = $('<div><a href="'+params.path+'" rel="images"><img style="opacity:0;" src="'+params.path+'" /></a></div>');
@@ -105,7 +106,21 @@ $(function () {
         $('#droparea').toggle();
         return false;
     });
-    
+
+
+    $('#latest_menu').click(function(){
+        msgq.message('latest123', 'latest');
+    });
+
+    $('#random_menu').click(function(){
+        msgq.message('random123', 'random');
+    });
+
+    $('#top_menu').click(function(){
+        msgq.message('top123', 'top');
+    });
+
+
     var droparea = document.getElementById('droparea');
     droparea.ondrop = function (e) {
         $('#droparea').hide();
@@ -120,7 +135,6 @@ $(function () {
     };
 
     droparea.ondragover = function (e) {
-        //$('#droparea').css('background-color', '#ffffdd');
         return false;
     };
 
@@ -135,7 +149,7 @@ function uploadFiles(fileList) {
     for (i in fileList) {
         var file = fileList[i];
         if (!file || !file.type || file.type.length < 5 || file.type.substr(0, 5) != 'image') {
-            // TODO: show message here
+            msgq.message(file.fileName, 'file type not supported');
             continue;
         }
 

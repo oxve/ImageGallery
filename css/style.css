@@ -53,9 +53,12 @@ fieldset {
 }
 
 #messages div {
-  margin-bottom: 3px;
-  float: right;
-  clear: both;
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+    clear: both;
+    float: right;
+    margin-bottom: 3px;
+    padding: 4px 10px;
 }
 
 #header {
