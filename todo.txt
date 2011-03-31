@@ -33,5 +33,5 @@
 
 
 -----bugs-----
-* upload when less than eight images will remove image, requires reload of page
+* upload when less than eight images will remove last image anyway, full reload?
 
