@@ -50,10 +50,12 @@ fieldset {
   top: 0;
   right: 0;
   padding: 10px;
+  z-index: 1001;
 }
 
 #messages div {
     background-color: white;
+    border: 1px solid black;
     border-radius: 5px 5px 5px 5px;
     clear: both;
     float: right;

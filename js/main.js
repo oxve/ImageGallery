@@ -160,7 +160,7 @@ function uploadFiles(fileList) {
                 onload: (function(id, imgName) { return function(e) {
                     var resp = $.parseJSON(e.target.responseText);
                     if (resp.status == 'error') {
-                        msgq.message(id, 'Error when uploading ' + imgName + ': ' + resp.message);
+                        msgq.message(id, 'Error when uploading ' + imgName + ': ' + resp.message, 3000);
                         return;
                     }
                     loadImage(resp, '#slideshow', true);
@@ -172,7 +172,7 @@ function uploadFiles(fileList) {
                     msgq.message(id, 'Uploading ' + imgName + ': ' + Math.round((e.loaded / e.total) * 100) + ' %');
                 };})(ulId, file.fileName),
                 onload: (function(id, imgName) { return function (e) {
-                    msgq.message(id, imgName + ' done', 3000);
+                    msgq.message(id, imgName + ' uploaded', 3000);
                 };})(ulId, file.fileName)
             }
         };
