@@ -109,15 +109,15 @@ $(function () {
 
 
     $('#latest_menu').click(function(){
-        msgq.message('latest123', 'latest');
+        msgq.message('latest123', 'latest', 'info');
     });
 
     $('#random_menu').click(function(){
-        msgq.message('random123', 'random');
+        msgq.message('random123', 'random', 'info');
     });
 
     $('#top_menu').click(function(){
-        msgq.message('top123', 'top');
+        msgq.message('top123', 'top', 'info');
     });
 
 
@@ -149,7 +149,7 @@ function uploadFiles(fileList) {
     for (i = 0; i < fileList.length; ++i) {
         var file = fileList[i];
         if (!file || !file.type || file.type.length < 5 || file.type.substr(0, 5) != 'image') {
-            msgq.message('error' + new Date().getTime(), 'file type not supported');
+            msgq.message('error' + new Date().getTime(), 'file type not supported', 'error');
             continue;
         }
 
@@ -160,7 +160,7 @@ function uploadFiles(fileList) {
                 onload: (function(id, imgName) { return function(e) {
                     var resp = $.parseJSON(e.target.responseText);
                     if (resp.status == 'error') {
-                        msgq.message(id, 'Error when uploading ' + imgName + ': ' + resp.message, 3000);
+                        msgq.message(id, 'Error when uploading ' + imgName + ': ' + resp.message, 'warning', 3000);
                         return;
                     }
                     loadImage(resp, '#slideshow', true);
@@ -169,10 +169,10 @@ function uploadFiles(fileList) {
             },
             ul: {
                 onprogress: (function(id, imgName) { return function (e) {
-                    msgq.message(id, 'Uploading ' + imgName + ': ' + Math.round((e.loaded / e.total) * 100) + ' %');
+                    msgq.message(id, 'Uploading ' + imgName + ': ' + Math.round((e.loaded / e.total) * 100) + ' %', 'info');
                 };})(ulId, file.fileName),
                 onload: (function(id, imgName) { return function (e) {
-                    msgq.message(id, imgName + ' uploaded', 3000);
+                    msgq.message(id, imgName + ' uploaded', 'info', 3000);
                 };})(ulId, file.fileName)
             }
         };

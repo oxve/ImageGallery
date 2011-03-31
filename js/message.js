@@ -5,7 +5,7 @@ function MessageQueue(messageContainer) {
     };
 }
 
-MessageQueue.prototype.message = function(id, msg, timeout) {
+MessageQueue.prototype.message = function(id, msg, class, timeout) {
     var t = this;
     var element = $('#'+id, t._mc);
     if (element.length != 1) {
@@ -14,6 +14,7 @@ MessageQueue.prototype.message = function(id, msg, timeout) {
         // TODO: Fancy animation
         $(t._mc).append(element);
     }
+    element.attr('class', class);
     element.html(msg);
 
     var timer = element.data('timer');
