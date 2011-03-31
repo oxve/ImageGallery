@@ -12,13 +12,18 @@
 
 * stats
     - top uploader
-    - top images
-    - ?
+    - number of images
+    - images uploaded / month
 
-* latest
+* detailed view
+    - change sort order
+    - add comments
 
 
 -----low priority-----
+
+* stats
+    - top images
 
 * random image
 
@@ -29,4 +34,4 @@
 
 -----bugs-----
 * upload when less than eight images will remove image, requires reload of page
-* something is obscuring the messages (z-index)
+
