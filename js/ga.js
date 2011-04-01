@@ -1,7 +1,7 @@
 // Init Google Analytics
 var _gaq = _gaq || [];
 
-if (window.location.host === 'bild.veslife.se') {
+if (window.location.host === 'bild.vestlife.se') {
     _gaq.push(['_setAccount', 'UA-22429777-1']);
     _gaq.push(['_trackPageview']);
     

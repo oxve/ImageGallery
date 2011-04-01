@@ -1,7 +1,7 @@
 function MessageQueue(messageContainer) {
     this._mc = messageContainer;
     this._rm = function(el) {
-        $(el).animate({opacity: 0}, 'fast').slideUp('fast', function(){$(this).remove();});
+        $(el).animate({opacity: 0}, 'fast').slideUp('fast').end().remove();
     };
 }
 

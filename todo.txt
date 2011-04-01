@@ -7,7 +7,6 @@
 
 * voting
 
-
 -----medium priority-----
 
 * stats
@@ -19,6 +18,8 @@
     - change sort order
     - add comments
 
+* navigation
+    - implement back/forward button suport
 
 -----low priority-----
 
@@ -33,6 +34,6 @@
 
 
 -----bugs-----
-* upload when less than eight images will remove last image anyway, full reload?
+* upload when less than eight images will remove last image anyway, full reload
 * uploading a file with the same name as an existing file will overwrite the old file
 

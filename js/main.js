@@ -1,7 +1,10 @@
 var msgq = new MessageQueue('#messages');
 
 function loadImage(params, addTo, prepend) {
-    var image = $('<div><a href="'+params.path+'" rel="images"><img style="opacity:0;" src="'+params.path+'" /></a></div>');
+    var image = $('<div/>').append(
+        $('<a />').attr('href', params.path).attr('rel', 'images').append(
+            $('<img />').attr('src', params.path).css({opacity: 0})));
+    
     $('img', image).load(function(){ $(this).animate({opacity: 1}, 500); });
     if (prepend) {
         $(addTo).prepend(image);
@@ -74,6 +77,8 @@ window.onpopstate = function(e) {
 
 
 $(function () {
+    trackEvent('navigation', 'visit_page', 'page_1');
+
     $('#slideshow a').live('click', function(){
         jQuery.fancybox({
             'autoDimensions': false,
