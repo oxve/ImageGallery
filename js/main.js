@@ -13,7 +13,7 @@ function loadImage(params, addTo, prepend) {
 function setupNavigation() {
     
     $('#navigation').data('currindex', 0);
-    
+
     $('#navigation .left').click(function() {
         var currindex = $('#navigation').data('currindex');
         var imagelist = $('#slideshow').data('imagelist');
