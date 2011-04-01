@@ -18,6 +18,7 @@ function AjaxFileUpload(handlers) {
     xhr.upload.addEventListener('readystatechange', handlers.ul.onreadystatechange, false);
 
     this.uploadFile = function(file, data, uploader) {
+        trackEvent('image', 'upload', uploader);
         xhr.open('post', '/upload', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send('filename='+file.fileName+'&filedata='+encodeURIComponent(encode64(data))+'&uploader='+uploader);

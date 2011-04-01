@@ -1,11 +1,11 @@
 
 -----top priority-----
 
+* adding uploader name to uploads (branch: tags-and-uploaders)
+
+* tagging (branch: tags-and-uploaders)
+
 * voting
-
-* tagging
-
-* adding uploader name to uploads
 
 
 -----medium priority-----
@@ -34,4 +34,5 @@
 
 -----bugs-----
 * upload when less than eight images will remove last image anyway, full reload?
+* uploading a file with the same name as an existing file will overwrite the old file
 

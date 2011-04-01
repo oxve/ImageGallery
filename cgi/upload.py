@@ -15,24 +15,24 @@ if __name__=="__main__":
     db = shelve.open('imagestore.db')
     form = cgi.FieldStorage()
     # check if the post includes the required data
-    if not (form.has_key('filename') and form.has_key('filedata')):
-        print json.dumps({'status': 'error', 'message': 'missing file'})
+    if not (form.has_key('filename') and form.has_key('filedata') and form.has_key('uploader')):
+        print json.dumps({'status': 'error', 'message': 'upload info not complete'})
         exit(0)
 
     ## TODO: Check if the posted data really is an image
     filename = form['filename'].value
     filedata = base64.b64decode(form['filedata'].value)
+    uploader = form['uploader'].value
     hashdigest = hashlib.sha224(filedata).hexdigest()
     if db.has_key(hashdigest):
         print json.dumps({'status': 'error', 'message': 'duplicate image', 'path': db[hashdigest]})
     else:
-        imagepath = imagespath + form['filename'].value
-        with open(imagespath + form['filename'].value, 'wb') as newimage:
+        with open(imagespath + filename, 'wb') as newimage:
             newimage.write(filedata)
-        db[hashdigest] = 'images/' + form['filename'].value
+        db[hashdigest] = 'images/' + filename
         print json.dumps({'status': 'ok', 'path': 'images/' + filename})
         if db.has_key('imagelist'):
             images = db['imagelist']
-            images.insert(0, {'path': '/images/' + filename, 'time': time.time()})
+            images.insert(0, {'path': '/images/' + filename, 'time': time.time(), 'uploader': uploader})
             db['imagelist'] = images
     db.close()

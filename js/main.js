@@ -18,6 +18,7 @@ function setupNavigation() {
         var currindex = $('#navigation').data('currindex');
         var imagelist = $('#slideshow').data('imagelist');
         if (currindex > 0) {
+            trackEvent('navigation', 'visit_page', 'page_'+(currindex / 8));
             $('#slideshow div').remove();
             var i;
             for (i = currindex - 1; i >= currindex - 8; --i) {
@@ -33,6 +34,7 @@ function setupNavigation() {
         var currindex = $('#navigation').data('currindex');
         var imagelist = $('#slideshow').data('imagelist');
         if (currindex + 8 < imagelist.length) {
+            trackEvent('navigation', 'visit_page', 'page_'+(currindex / 8 + 2));
             $('#slideshow div').remove();
             var i;
             for (i = currindex + 8; i < currindex + 16 && i < imagelist.length; ++i) {
