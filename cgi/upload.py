@@ -20,7 +20,7 @@ if __name__=="__main__":
     db = shelve.open('imagestore.db')
 
     try:
-        image = json.loads(sys.stdin.read(os.environ['CONTENT_LENGTH']))
+        image = json.loads(sys.stdin.read(int(os.environ['CONTENT_LENGTH'])))
         ## TODO: Check if the posted data really is an image
         imagedata = base64.b64decode(image['data'])
         
