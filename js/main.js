@@ -9,9 +9,7 @@ function loadImage(params, addTo, prepend) {
         $('<a />')
             .attr('href', params.path)
             .attr('rel', 'gallery')
-            .attr('title', 'Uploaded '+formatDate(new Date(params.time*1000))+' by '+params.uploader)
-            .data('uploader', params.uploader)
-            .data('time', params.time)
+            .attr('title', 'Uploaded '+formatDate(new Date(params.time*1000))+' by '+(params.uploader||'anonymous'))
             .append($('<img />')
                 .attr('src', params.path)
                 .css({opacity: 0})));
@@ -37,8 +35,6 @@ function loadImage(params, addTo, prepend) {
                             .attr('src', '/js/fancybox/close.gif'))))
                 .append((title&&title.length?'<div><b>'+title+'</b></div>':'')+'Image '+(currindex+i+1)+' of '+total);
             return el;
-
-            //return '<div id="image-title">'+(title&&title.length?'<div><b>'+title+'</b></div>':'')+'Image '+(i+1)+' of '+arr.length+'</div>';
         }
     });
 
