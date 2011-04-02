@@ -1,8 +1,6 @@
 
 -----top priority-----
 
-* adding uploader name to uploads (branch: tags-and-uploaders)
-
 * voting
 
 * tagging (branch: tags-and-uploaders)
