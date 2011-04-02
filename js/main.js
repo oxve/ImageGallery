@@ -1,11 +1,47 @@
 var msgq = new MessageQueue('#messages');
 
+function formatDate(d) {
+    return d.getDate() + '/' + d.getMonth() + ' ' + d.getFullYear();
+}
+
 function loadImage(params, addTo, prepend) {
     var image = $('<div/>').append(
-        $('<a />').attr('href', params.path).attr('rel', 'images').append(
-            $('<img />').attr('src', params.path).css({opacity: 0})));
+        $('<a />')
+            .attr('href', params.path)
+            .attr('rel', 'gallery')
+            .attr('title', 'Uploaded '+formatDate(new Date(params.time*1000))+' by '+params.uploader)
+            .data('uploader', params.uploader)
+            .data('time', params.time)
+            .append($('<img />')
+                .attr('src', params.path)
+                .css({opacity: 0})));
     
     $('img', image).load(function(){ $(this).animate({opacity: 1}, 500); });
+    $('a', image).fancybox({
+        'autoDimensions': false,
+        'width': 'auto',
+        'height': 'auto',
+        'href': $(this).attr('href'),
+        'showCloseButton': false,
+        'titlePosition': 'inside',
+        'titleFormat': function(title, arr, i, opts) {
+            var currindex = $('#navigation').data('currindex');
+            var total = $('#slideshow').data('imagelist').length;
+            var el = $('<div/>')
+                .attr('id', 'image-title')
+                .append($('<span/>')
+                    .append($('<a/>')
+                        .attr('href', 'javascript:;')
+                        .click($.fancybox.close)
+                        .append($('<img/>')
+                            .attr('src', '/js/fancybox/close.gif'))))
+                .append((title&&title.length?'<div><b>'+title+'</b></div>':'')+'Image '+(currindex+i+1)+' of '+total);
+            return el;
+
+            //return '<div id="image-title">'+(title&&title.length?'<div><b>'+title+'</b></div>':'')+'Image '+(i+1)+' of '+arr.length+'</div>';
+        }
+    });
+
     if (prepend) {
         $(addTo).prepend(image);
     } else {
@@ -79,15 +115,22 @@ window.onpopstate = function(e) {
 $(function () {
     trackEvent('navigation', 'visit_page', 'page_1');
 
+/*
     $('#slideshow a').live('click', function(){
         jQuery.fancybox({
             'autoDimensions': false,
             'width': 'auto',
             'height': 'auto',
-            'href': $(this).attr('href')
+            'href': $(this).attr('href'),
+            'showCloseButton': false,
+            'titlePosition': 'inside',
+            'titleFormat': function(title, arr, i, opts) {
+                return '<div style="overflow:auto;text-align:left;"><span style="float:right;"><a href="javascript:;" onclick="$.fancybox.close();"><img src="/js/fancybox/close.gif" /></a></span>'+(title&&title.length?'<b>'+title+'</b>':'')+'Image '+(i+1)+' of '+arr.length+'</div>';
+            }
         });
         return false;
     });
+*/
 
     loadImages();
     setupNavigation();

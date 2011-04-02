@@ -245,3 +245,12 @@ fieldset {
   line-height: normal;
   font-size: 10px;
 }
+
+#image-title {
+    overflow: auto;
+    text-align: left;
+}
+
+#image-title span {
+    float: right;
+}
