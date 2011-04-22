@@ -17,7 +17,9 @@
     - add comments
 
 * navigation
-    - implement back/forward button suport
+    - implement back/forward button support
+
+* add wrapper class for database
 
 -----low priority-----
 
@@ -34,4 +36,4 @@
 -----bugs-----
 * upload when less than eight images will remove last image anyway, full reload
 * uploading a file with the same name as an existing file will overwrite the old file
-
+* newly uploaded image shows null instead of date and uploader

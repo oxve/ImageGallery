@@ -22,9 +22,11 @@ function AjaxFileUpload(handlers) {
         xhr.open('post', '/upload', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
-            'name': file.fileName,
-            'data': encode64(data),
-            'uploader': uploader
+            'filedata': encode64(data),
+            'metadata': {
+                'name': file.fileName,
+                'uploader': uploader
+            }
         }));
     };
 }
