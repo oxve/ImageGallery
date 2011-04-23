@@ -111,23 +111,6 @@ window.onpopstate = function(e) {
 $(function () {
     trackEvent('navigation', 'visit_page', 'page_1');
 
-/*
-    $('#slideshow a').live('click', function(){
-        jQuery.fancybox({
-            'autoDimensions': false,
-            'width': 'auto',
-            'height': 'auto',
-            'href': $(this).attr('href'),
-            'showCloseButton': false,
-            'titlePosition': 'inside',
-            'titleFormat': function(title, arr, i, opts) {
-                return '<div style="overflow:auto;text-align:left;"><span style="float:right;"><a href="javascript:;" onclick="$.fancybox.close();"><img src="/js/fancybox/close.gif" /></a></span>'+(title&&title.length?'<b>'+title+'</b>':'')+'Image '+(i+1)+' of '+arr.length+'</div>';
-            }
-        });
-        return false;
-    });
-*/
-
     loadImages();
     setupNavigation();
 
