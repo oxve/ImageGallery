@@ -1,11 +1,11 @@
 
 -----top priority-----
 
-* voting
-
-* tagging (branch: tags-and-uploaders)
+* tagging
 
 -----medium priority-----
+
+* voting
 
 * stats
     - top uploader
@@ -17,9 +17,8 @@
     - add comments
 
 * navigation
-    - implement back/forward button support
+    - single image url
 
-* add wrapper class for database
 
 -----low priority-----
 
@@ -30,8 +29,15 @@
 
 * messages (branch: add-message support)
     - file load status
-    - server error when uploading
 
 
 -----bugs-----
 * upload when less than eight images will remove last image anyway, full reload
+
+
+-----behind the scenes-----
+* add wrapper class for database
+
+* clean up in popup.js
+
+* refactor pages and navigation, too much code duplication

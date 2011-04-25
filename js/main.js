@@ -8,34 +8,17 @@ function loadImage(params, addTo, prepend) {
     var image = $('<div/>').append(
         $('<a />')
             .attr('href', params.path)
-            .attr('rel', 'gallery')
             .attr('title', 'Uploaded '+formatDate(new Date(params.time*1000))+' by '+(params.uploader||'anonymous'))
             .append($('<img />')
                 .attr('src', params.path)
                 .css({opacity: 0})));
     
     $('img', image).load(function(){ $(this).animate({opacity: 1}, 500); });
-    $('a', image).fancybox({
-        'autoDimensions': false,
-        'width': 'auto',
-        'height': 'auto',
-        'href': $(this).attr('href'),
-        'showCloseButton': false,
-        'titlePosition': 'inside',
-        'titleFormat': function(title, arr, i, opts) {
-            var currindex = $('#navigation').data('currindex');
-            var total = $('#slideshow').data('imagelist').length;
-            var el = $('<div/>')
-                .attr('id', 'image-title')
-                .append($('<span/>')
-                    .append($('<a/>')
-                        .attr('href', 'javascript:;')
-                        .click($.fancybox.close)
-                        .append($('<img/>')
-                            .attr('src', '/js/fancybox/close.gif'))))
-                .append((title&&title.length?'<div><b>'+title+'</b></div>':'')+'Image '+(currindex+i+1)+' of '+total);
-            return el;
-        }
+    
+    $('a', image).click(function() {
+        var index = parseInt(window.location.hash.substring(5) || 1) - 1;
+        open_popup($('#slideshow').data('imagelist'), index*8 + $(this).parent().index());
+        return false;
     });
 
     if (prepend) {
@@ -46,40 +29,47 @@ function loadImage(params, addTo, prepend) {
 }
 
 function setupNavigation() {
-    
-    $('#navigation').data('currindex', 0);
-
     $('#navigation .left').click(function() {
-        var currindex = $('#navigation').data('currindex');
+        var page;
+        if (window.location.hash.indexOf('#page') === 0) {
+            page = parseInt(window.location.hash.substring(5)) - 1;
+        } else {
+            page = 0;
+        }
+        var currindex = page * 8;
         var imagelist = $('#slideshow').data('imagelist');
         if (currindex > 0) {
-            trackEvent('navigation', 'visit_page', 'page_'+(currindex / 8));
             $('#slideshow div').remove();
             var i;
             for (i = currindex - 1; i >= currindex - 8; --i) {
                 loadImage(imagelist[i], '#slideshow', true);
             }
-            $('#navigation').data('currindex', currindex - 8);
-            window.location.hash = '#page' + (currindex / 8);
+            window.location.hash = 'page' + (currindex / 8);
         }
         return false;
     });
     
     $('#navigation .right').click(function() {
-        var currindex = $('#navigation').data('currindex');
+        var page;
+        if (window.location.hash.indexOf('#page') === 0) {
+            page = parseInt(window.location.hash.substring(5)) - 1;
+        } else {
+            page = 0;
+        }
+        var currindex = page * 8;
         var imagelist = $('#slideshow').data('imagelist');
         if (currindex + 8 < imagelist.length) {
-            trackEvent('navigation', 'visit_page', 'page_'+(currindex / 8 + 2));
             $('#slideshow div').remove();
             var i;
             for (i = currindex + 8; i < currindex + 16 && i < imagelist.length; ++i) {
                 loadImage(imagelist[i], '#slideshow', false);
             }
-            $('#navigation').data('currindex', currindex + 8);
-            window.location.hash = '#page' + (currindex / 8 + 2);
+            window.location.hash = 'page' + (currindex / 8 + 2);
         }
         return false;
     });
+    
+    window.location.hash = '';
 }
 
 function loadImages() {
@@ -97,14 +87,26 @@ function loadImages() {
             if (i == 8) break;
             loadImage(sortedlist[i], '#slideshow', false);
         }
-        window.location.hash = '';
     });
 }
 
-
-
 window.onpopstate = function(e) {
-    //console.log(e.target);
+    var imagelist = $('#slideshow').data('imagelist');
+    var page;
+    var i;
+    
+    if (!imagelist) return;
+    
+    if (window.location.hash.indexOf('#page') === 0) {
+        page = parseInt(window.location.hash.substring(5)) - 1;
+    } else {
+        page = 0;
+    }
+    $('#slideshow div').remove();
+    for (i = page * 8; i < page * 8 + 8 && i < imagelist.length; ++i) {
+        loadImage(imagelist[i], '#slideshow', false);
+    }
+    trackEvent('navigation', 'visit_page', 'page_'+(page+1));
 };
 
 
