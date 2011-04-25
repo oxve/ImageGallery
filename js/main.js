@@ -194,6 +194,9 @@ function uploadFiles(fileList) {
                         msgq.message(id, 'Error when uploading ' + imgName + ': ' + resp.message, 'warning', 3000);
                         return;
                     }
+                    var imagelist = $('#slideshow').data('imagelist');
+                    imagelist.splice(0, 0, resp);
+                    $('#slideshow').data('imagelist', imagelist);
                     loadImage(resp, '#slideshow', true);
                     $('#slideshow > div:last-child').remove();
                 };})(dlId, file.fileName)
