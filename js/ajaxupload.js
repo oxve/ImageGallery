@@ -22,7 +22,7 @@ function AjaxFileUpload(handlers) {
         xhr.open('post', '/upload', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
-            'filedata': encode64(data),
+            'filedata': btoa(data),
             'metadata': {
                 'name': file.fileName,
                 'uploader': uploader

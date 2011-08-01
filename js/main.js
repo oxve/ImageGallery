@@ -165,11 +165,11 @@ $(function () {
         return false;
     };
 
-    droparea.ondragover = function (e) {
+    droparea.ondragover = function(e) {
         return false;
     };
 
-    document.getElementById('slideshow').ondragover = function (e) {
+    document.getElementById('slideshow').ondragover = function(e) {
         $('#droparea').show();
     };
 

@@ -3,14 +3,14 @@
 
 * tagging
 
------medium priority-----
-
-* voting
-
 * stats
     - top uploader
     - number of images
     - images uploaded / month
+
+-----medium priority-----
+
+* voting
 
 * detailed view
     - change sort order
