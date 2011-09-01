@@ -1,4 +1,4 @@
-#!/opt/local/bin/python
+#!/usr/bin/python
 import base64
 import hashlib
 import shelve
