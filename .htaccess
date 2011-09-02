@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
   Options FollowSymLinks
+  DirectoryIndex index.htm
   RewriteEngine On
   RewriteBase /
   RewriteCond %{REQUEST_FILENAME} !-f
