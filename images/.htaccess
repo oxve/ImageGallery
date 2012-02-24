@@ -1,0 +1,4 @@
+# Turn on Expires and set default to 0
+ExpiresActive On
+ExpiresDefault "access plus 10 years"
+Header append Cache-Control "public"
