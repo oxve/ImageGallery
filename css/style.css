@@ -267,3 +267,17 @@ fieldset { border: none; }
     opacity: 0.5;
     z-index:99;
 }
+
+.popup-bg span {
+    position: absolute;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.popup-bg .right {
+    right: 10px;
+}
+
+.popup-bg .left {
+    left: 10px;
+}
