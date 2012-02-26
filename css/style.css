@@ -241,17 +241,29 @@ fieldset { border: none; }
     left: 50%;
     border-radius: 5px;
     border: 1px solid black;
+    z-index: 100;
 }
 
 .popup img {
     display: block;
     margin: 0 auto;
+    max-height: 95%;
+    max-width: 95%;
 }
 
-.popup a.prev {
-    float: left;
+.popup .info {
+    white-space: nowrap;
+    position: absolute;
+    bottom: 5px;
 }
 
-.popup a.next {
-    float: right;
+.popup-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index:99;
 }
