@@ -1,5 +1,4 @@
 function open_popup(array, index) {
-    var title = get_title(array[index], index + 1, array.length);
     var hide_popup = function(callback) {
         $('.popup, .popup-bg').animate({opacity: 0}, {
             'duration': 'fast', 
@@ -28,6 +27,7 @@ function open_popup(array, index) {
 
             var popup = $('.popup');
             popup.html('').show();
+            var title = get_title(array[index], index + 1, array.length);
             var imginfo = $('<span class="info" />').html(title);
             $('.popup').append(image, imginfo).css('opacity', 1);
             resize_popup_image();
