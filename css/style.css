@@ -270,14 +270,14 @@ fieldset { border: none; }
 
 .popup-bg span {
     position: absolute;
-    font-size: 30px;
+    font-size: 40px;
     cursor: pointer;
 }
 
 .popup-bg .right {
-    right: 10px;
+    right: 50px;
 }
 
 .popup-bg .left {
-    left: 10px;
+    left: 50px;
 }

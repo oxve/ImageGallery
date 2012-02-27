@@ -63,9 +63,9 @@ function open_popup(array, index) {
     $(window).click(hide_popup);
     $(window).keydown(function(e){
         if (e.keyCode === 37) {
-            show_prev();
+            show_prev(e);
         } else if (e.keyCode === 39) {
-            show_next();
+            show_next(e);
         } else if (e.keyCode === 27) {
             hide_popup();
         }
