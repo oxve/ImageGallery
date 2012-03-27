@@ -199,15 +199,15 @@ function uploadFiles(fileList) {
                     $('#slideshow').data('imagelist', imagelist);
                     loadImage(resp, '#slideshow', true);
                     $('#slideshow > div:last-child').remove();
-                };})(dlId, file.fileName)
+                };})(dlId, file.name || file.fileName)
             },
             ul: {
                 onprogress: (function(id, imgName) { return function (e) {
                     msgq.message(id, 'Uploading ' + imgName + ': ' + Math.round((e.loaded / e.total) * 100) + ' %', 'info');
-                };})(ulId, file.fileName),
+                };})(ulId, file.name || file.fileName),
                 onload: (function(id, imgName) { return function (e) {
                     msgq.message(id, imgName + ' uploaded', 'info', 3000);
-                };})(ulId, file.fileName)
+                };})(ulId, file.name || file.fileName)
             }
         };
 
@@ -221,9 +221,7 @@ function uploadFiles(fileList) {
             };
         })(file, ulId, handlers);
         reader.onprogress = (function (id) {
-            return function (e) {
-                console.log('Loading file: ' + Math.round((e.loaded / e.total) * 100) + ' %');
-            };
+            return function (e) { };
         })(ulId);
         reader.readAsBinaryString(file);
     }
