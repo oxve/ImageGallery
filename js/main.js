@@ -40,8 +40,7 @@ function setupNavigation() {
         var imagelist = $('#slideshow').data('imagelist');
         if (currindex > 0) {
             $('#slideshow div').remove();
-            var i;
-            for (i = currindex - 1; i >= currindex - 8; --i) {
+            for (var i = currindex - 1; i >= currindex - 8; --i) {
                 loadImage(imagelist[i], '#slideshow', true);
             }
             window.location.hash = 'page' + (currindex / 8);
@@ -60,8 +59,7 @@ function setupNavigation() {
         var imagelist = $('#slideshow').data('imagelist');
         if (currindex + 8 < imagelist.length) {
             $('#slideshow div').remove();
-            var i;
-            for (i = currindex + 8; i < currindex + 16 && i < imagelist.length; ++i) {
+            for (var i = currindex + 8; i < currindex + 16 && i < imagelist.length; ++i) {
                 loadImage(imagelist[i], '#slideshow', false);
             }
             window.location.hash = 'page' + (currindex / 8 + 2);
@@ -93,7 +91,6 @@ function loadImages() {
 window.onpopstate = function(e) {
     var imagelist = $('#slideshow').data('imagelist');
     var page;
-    var i;
     
     if (!imagelist) return;
     
@@ -103,7 +100,7 @@ window.onpopstate = function(e) {
         page = 0;
     }
     $('#slideshow div').remove();
-    for (i = page * 8; i < page * 8 + 8 && i < imagelist.length; ++i) {
+    for (var i = page * 8; i < page * 8 + 8 && i < imagelist.length; ++i) {
         loadImage(imagelist[i], '#slideshow', false);
     }
     trackEvent('navigation', 'visit_page', 'page_'+(page+1));
@@ -176,8 +173,7 @@ $(function () {
 });
 
 function uploadFiles(fileList) {
-    var i;
-    for (i = 0; i < fileList.length; ++i) {
+    for (var i = 0; i < fileList.length; ++i) {
         var file = fileList[i];
         if (!file || !file.type || file.type.length < 5 || file.type.substr(0, 5) != 'image') {
             msgq.message('error' + new Date().getTime(), 'file type not supported', 'error');
@@ -214,10 +210,9 @@ function uploadFiles(fileList) {
         var reader = new FileReader();
         reader.onloadend = (function (img, id, handlerObj) {
             return function (e) {
-                console.log('done loading');
                 var uploader = $.cookie('whoami') || 'anonymous';
                 var afu = new AjaxFileUpload(handlerObj);
-                afu.uploadFile(img, e.target.result, uploader);
+                afu.uploadFile(e.target.result, {uploader: uploader, name: img.name || img.fileName);
             };
         })(file, ulId, handlers);
         reader.onprogress = (function (id) {

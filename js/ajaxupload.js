@@ -17,16 +17,10 @@ function AjaxFileUpload(handlers) {
     xhr.upload.addEventListener('progress', handlers.ul.onprogress, false);
     xhr.upload.addEventListener('readystatechange', handlers.ul.onreadystatechange, false);
 
-    this.uploadFile = function(file, data, uploader) {
+    this.uploadFile = function(data, metadata) {
         trackEvent('image', 'upload', uploader);
         xhr.open('post', '/upload', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({
-            'filedata': btoa(data),
-            'metadata': {
-                'name': file.fileName,
-                'uploader': uploader
-            }
-        }));
+        xhr.send(JSON.stringify({ 'filedata': btoa(data), 'metadata': metadata }));
     };
 }
