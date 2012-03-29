@@ -212,7 +212,7 @@ function uploadFiles(fileList) {
             return function (e) {
                 var uploader = $.cookie('whoami') || 'anonymous';
                 var afu = new AjaxFileUpload(handlerObj);
-                afu.uploadFile(e.target.result, {uploader: uploader, name: img.name || img.fileName);
+                afu.uploadFile(e.target.result, {uploader: uploader, name: img.name || img.fileName});
             };
         })(file, ulId, handlers);
         reader.onprogress = (function (id) {
