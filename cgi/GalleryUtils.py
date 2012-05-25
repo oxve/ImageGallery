@@ -97,10 +97,13 @@ def upload_image(data, metadata):
     metadata['hash'] = hashdigest
     image = Image(metadata)
 
+    # need to shorten image name if it's too long, assign a default name
+    if len(image.name) > 50:
+        image.name = 'kitten' + image.name[image.name.rfind('.'):]
 
     # check if there is an other image with the same name
     while os.path.exists(image.filepath):
-        image.name = str(time.time()) + image.name
+        image.name = (str(time.time()) % 10) + image.name
 
     # all is good, save image to disk and list
     with open(image.filepath, 'wb') as imagefile:

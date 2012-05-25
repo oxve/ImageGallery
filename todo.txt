@@ -41,3 +41,5 @@
 * clean up in popup.js
 
 * refactor pages and navigation, too much code duplication
+
+* add paging in db queries
