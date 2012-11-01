@@ -4,6 +4,7 @@ import hashlib
 import shelve
 import time
 import re
+import random
 import MySQLdb
 import MySQLdb.cursors
 import ast
@@ -103,7 +104,7 @@ def upload_image(data, metadata):
 
     # check if there is an other image with the same name
     while os.path.exists(image.filepath):
-        image.name = (str(time.time()) % 10) + image.name
+        image.name = str(random.randrange(0, 10)) + image.name
 
     # all is good, save image to disk and list
     with open(image.filepath, 'wb') as imagefile:
